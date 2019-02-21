@@ -1,0 +1,19 @@
+{
+  "name": "wui",
+  "version": "1.0.0",
+  "description": "Responsive block UI",
+  "main": "app.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpvonly/wui.git"
+  },
+  "author": "Ari P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fpvonly/wui/issues"
+  },
+  "homepage": "https://github.com/fpvonly/wui#readme"
+}
