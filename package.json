@@ -4,16 +4,35 @@
   "description": "Responsive block UI",
   "main": "app.jsx",
   "scripts": {
+    "dev": "webpack-dev-server --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fpvonly/wui.git"
   },
-  "author": "Ari P",
-  "license": "ISC",
+  "author": "Ari Petäjäjärvi",
+  "license": "",
   "bugs": {
     "url": "https://github.com/fpvonly/wui/issues"
   },
-  "homepage": "https://github.com/fpvonly/wui#readme"
+  "homepage": "https://github.com/fpvonly/wui#readme",
+  "dependencies": {
+    "react": "^16.8.3",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.8.3",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0"
+  }
 }
