@@ -1,15 +1,15 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "edge": 12
         },
-        "useBuiltIns": true
+        "useBuiltIns": "entry"
       }
     ],
-    "react"
+    "@babel/preset-react"
   ],
   "plugins": [
        "transform-class-properties",
