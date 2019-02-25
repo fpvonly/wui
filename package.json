@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/fpvonly/wui#readme",
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.8.3",
