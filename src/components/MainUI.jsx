@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 
 
 import TaskBar from './TaskBar.jsx'
+import MenuArea from './MenuArea.jsx'
 
 
 
@@ -30,11 +31,11 @@ class UI extends React.Component {
     let taskbar = null;
     let menu = null;
     taskbar = <TaskBar menuOpen={this.state.menuOpen} handleStartClick={this.handleStartClick} />;
-    menu = (this.state.menuOpen === true) ? <div className='menu'>MENU</div> : null;
+    menu = (this.state.menuOpen === true) ? <MenuArea /> : null;
 
     return <div className='ui'>
       {menu}
-      {taskbar}    
+      {taskbar}
     </div>;
   }
 
