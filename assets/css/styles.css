@@ -72,23 +72,35 @@ html, body {
 .taskbar {
   width: 100%;
   height: 5rem;
+  display: flex;
+}
+
+.taskbar .bar {
   background-color: rgba(21, 28, 31, 0.7);
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  width: calc(100% - 5em);
+  height: 100%;
+  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 .start_btn {
   width: 5rem;
   height: 5rem;
   cursor: pointer;
-  opacity: 0.6;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
   transition: all 0.4s;
+  background-color: rgba(21, 28, 31, 0.7);
+  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.3);
 }
 
-.start_btn:hover {
+.start_btn.active {
+  background-color: rgba(21, 28, 31, 0.5);
+  box-shadow: none;
+}
+
+.start_btn:not(.active):hover {
   opacity: 1;
   background-color: rgba(21, 28, 31, 1);
 }
