@@ -116,7 +116,21 @@ html, body {
   width: 70%;
   height: 50rem;
   background-color: rgba(21, 28, 31, 0.5);
-  display:flex;
+  display: flex;
+  position: relative;
+}
+
+.menu .resize_grip {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 0;
+  right: 0;
+  z-index: 5000;
+  cursor: nesw-resize;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  background: repeating-linear-gradient(45deg,rgba(255,255,255,.5),rgba(255,255,255,.5) 2px,#000 2px,#000 4px);
 }
 
 .menu .side_panel {
@@ -142,5 +156,14 @@ html, body {
 
 .menu .content_panel {
   min-width: 20rem;
-  height: 100%
+  padding: 2rem;
+  display: grid;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  grid-template-columns: 250px 250px 250px;
+  grid-template-rows: 150px 150px 150px;
+}
+
+.menu .box {
+  background-color: rgba(0, 0, 0, 0.5);
 }

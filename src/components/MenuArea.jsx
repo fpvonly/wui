@@ -37,8 +37,14 @@ class MenuArea extends React.Component {
         </div>
       </div>
       <div className='content_panel'>
-      content
+        <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
+
       </div>
+      <div className='resize_grip' />
     </div>;
   }
 
