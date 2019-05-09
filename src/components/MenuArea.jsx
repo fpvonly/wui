@@ -12,6 +12,7 @@ class MenuArea extends React.Component {
     this.panel = null;
     this.menu = null;
     this.startX = null;
+    this.startY = null;
   }
 
   static defaultProps = {
@@ -26,21 +27,36 @@ class MenuArea extends React.Component {
     this.resizeGrip.addEventListener('mousedown', this.handleMouseDown, false);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('mousemove', this.handleMouseMove, false);
+  }
+
   handleMouseDown = (e) => {
     this.startX = e.pageX;
+    this.startY = e.pageY;
     this.startWidth = this.menu.getBoundingClientRect().width;
+    this.startHeight = this.menu.getBoundingClientRect().height;
     window.addEventListener('mousemove', this.handleMouseMove, false);
     window.addEventListener('mouseup', this.handleMouseUp, false);
   }
 
   handleMouseMove = (e) => {
-    let diffX = (this.startX < e.pageX) ? this.startX - e.pageX : this.startX - e.pageX;
-    let newWidth = (this.startWidth) - diffX;
+    let curWidth = this.menu.getBoundingClientRect().width;
+    let curHeight = this.menu.getBoundingClientRect().height;
+    let diffX = (curWidth > 500) ? this.startX - e.pageX : curWidth;
+    let newWidth = this.startWidth - diffX;
+    let diffY = (curHeight > 200) ? e.pageY - this.startY : curHeight;
+    let newHeight = this.startHeight - diffY;
 
-    this.menu.style.width = newWidth + 'px';
+    if (curWidth > 500) {
+      this.menu.style.width = newWidth + 'px';
+    }
+    if (newHeight > 200) {
+      this.menu.style.height = newHeight + 'px';
+    }
   }
 
-  handleMouseUp = (e) => {
+  handleMouseUp = () => {
     window.removeEventListener('mousemove', this.handleMouseMove, false);
   }
 
