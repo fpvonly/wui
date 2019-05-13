@@ -80,6 +80,11 @@ class MenuArea extends React.Component {
         <div className='box'></div>
         <div className='box'></div>
         <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
+        <div className='box'></div>
 
       </div>
       <div className='resize_grip' ref={(c) => { this.resizeGrip = c; }} />
