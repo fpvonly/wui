@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import PropTypes from 'prop-types';
+import MenuAreaBox from './MenuAreaBox.jsx';
 
 
 class MenuArea extends React.Component {
@@ -75,16 +76,9 @@ class MenuArea extends React.Component {
         </div>
       </div>
       <div className='content_panel' ref={(c) => { this.panel = c; }}>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
-        <div className='box'></div>
+        <MenuAreaBox text='1' order={2} />
+        <MenuAreaBox text='2' order={1} />
+        <MenuAreaBox text='3' order={3} />
 
       </div>
       <div className='resize_grip' ref={(c) => { this.resizeGrip = c; }} />
