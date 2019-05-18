@@ -182,9 +182,23 @@ html, body {
 .menu .box {
   background-color: rgba(0, 0, 0, 0.5);
   min-height: 150px;
+  position: relative;
 }
 
 .menu .box:focus {
   outline: none;
   background: rgba(0, 0, 0, 1);
+}
+
+.menu .box .box_resize_grip {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 0;
+  right: 0;
+  z-index: 5000;
+  cursor: nesw-resize;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  background: repeating-linear-gradient(45deg,rgba(255,255,255,.5),rgba(255,255,255,.5) 2px,#000 2px,#000 3px);
 }

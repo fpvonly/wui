@@ -44,15 +44,15 @@ class MenuArea extends React.Component {
   handleMouseMove = (e) => {
     let curWidth = this.menu.getBoundingClientRect().width;
     let curHeight = this.menu.getBoundingClientRect().height;
-    let diffX = (curWidth > 500) ? this.startX - e.pageX : curWidth;
+    let diffX = (curWidth >= 500) ? this.startX - e.pageX : curWidth;
     let newWidth = this.startWidth - diffX;
-    let diffY = (curHeight > 200) ? e.pageY - this.startY : curHeight;
+    let diffY = (curHeight >= 200) ? e.pageY - this.startY : curHeight;
     let newHeight = this.startHeight - diffY;
 
-    if (curWidth > 500) {
+    if (curWidth >= 500) {
       this.menu.style.width = newWidth + 'px';
     }
-    if (newHeight > 200) {
+    if (newHeight >= 200) {
       this.menu.style.height = newHeight + 'px';
     }
   }
@@ -61,8 +61,12 @@ class MenuArea extends React.Component {
     window.removeEventListener('mousemove', this.handleMouseMove, false);
   }
 
-
+  getContentPanelObj = () => {
+    return this.panel;
+  }
   render() {
+
+
     return <div className='menu' ref={(c) => { this.menu = c; }}>
       <div className='side_panel'>
         <div className='btn'>
@@ -76,9 +80,9 @@ class MenuArea extends React.Component {
         </div>
       </div>
       <div className='content_panel' ref={(c) => { this.panel = c; }}>
-        <MenuAreaBox text='1' order={2} />
-        <MenuAreaBox text='2' order={1} />
-        <MenuAreaBox text='3' order={3} />
+        <MenuAreaBox text='1' order={2} getContentPanelObj={this.getContentPanelObj} />
+        <MenuAreaBox text='2' order={1} getContentPanelObj={this.getContentPanelObj} />
+        <MenuAreaBox text='3' order={3} getContentPanelObj={this.getContentPanelObj} />
 
       </div>
       <div className='resize_grip' ref={(c) => { this.resizeGrip = c; }} />
