@@ -10,10 +10,11 @@ class MenuAreaBox extends React.Component {
 
     this.resizeGrip = null;
     this.panel = null;
-    this.menu = null;
+    this.titleInput = null;
     this.startX = null;
     this.startY = null;
     this.startWidth = -1;
+    this.dragStartX = -1;
 
     this.state = {
       order: this.props.order,
@@ -64,7 +65,6 @@ class MenuAreaBox extends React.Component {
   handleMouseUp = () => {
     let endWidth = this.panel.getBoundingClientRect().width;
     let colRelation = endWidth - this.startWidth;
-  //  colRelation = endWidth / (this.startWidth + colRelation*30)
     let containerWidth = this.props.getContentPanelObj().getBoundingClientRect().width;
     let singleColWidth = containerWidth / 3;
     let endCols = Math.ceil(endWidth / singleColWidth);
@@ -76,6 +76,25 @@ class MenuAreaBox extends React.Component {
     window.removeEventListener('mousemove', this.handleMouseMove, false);
   }
 
+  onMouseDown = (e) => {
+    this.dragStartX = e.pageX;
+    window.addEventListener('mousemove', this.handleMouseMove, false);
+    window.addEventListener('mouseup', this.handleMouseUp, false);
+  }
+
+  handleMouseMove = (e) => {
+    let dist = e.pageX - this.dragStartX;
+    this.panel.style.left = dist + 'px';
+  }
+
+  handleMouseUp = () => {
+    this.panel.style.left = 'auto';
+    this.panel.style.top = 'auto';
+
+    window.removeEventListener('mousemove', this.handleMouseMove, false);
+    window.removeEventListener('mouseup', this.handleMouseUp, false);
+  }
+
 
   render() {
     let styles = {
@@ -84,6 +103,7 @@ class MenuAreaBox extends React.Component {
     };
 
     return <div className='box' ref={(c) => { this.panel = c; }} style={styles}>
+      <input className='title_input' ref={(c) => { this.titleInput = c; }} type='text' defaultValue='Title' onMouseDown={this.onMouseDown} />
       {this.props.text}
       <div className='box_resize_grip' ref={(c) => { this.resizeGrip = c; }} />
     </div>;
