@@ -14,6 +14,10 @@ class MenuArea extends React.Component {
     this.menu = null;
     this.startX = null;
     this.startY = null;
+
+    this.state = {
+      colOrder: [1, 2, 3]
+    };
   }
 
   static defaultProps = {
@@ -64,6 +68,18 @@ class MenuArea extends React.Component {
   getContentPanelObj = () => {
     return this.panel;
   }
+
+  updateColOrder = (draggedIndex = 0 , targetIndex = 0) => {
+    let newOrder = this.state.colOrder;
+    newOrder[draggedIndex - 1] = parseInt(targetIndex, 10);
+    newOrder[targetIndex - 1] = parseInt(draggedIndex, 10);
+
+    console.log('updateColOrder ', draggedIndex, targetIndex);
+
+    this.setState({colOrder: newOrder});
+  }
+
+
   render() {
 
 
@@ -80,9 +96,9 @@ class MenuArea extends React.Component {
         </div>
       </div>
       <div className='content_panel' ref={(c) => { this.panel = c; }}>
-        <MenuAreaBox text='1' order={2} getContentPanelObj={this.getContentPanelObj} />
-        <MenuAreaBox text='2' order={1} getContentPanelObj={this.getContentPanelObj} />
-        <MenuAreaBox text='3' order={3} getContentPanelObj={this.getContentPanelObj} />
+        <MenuAreaBox text='A' order={this.state.colOrder[0]} getContentPanelObj={this.getContentPanelObj} updateColOrder={this.updateColOrder} />
+        <MenuAreaBox text='B' order={this.state.colOrder[1]} getContentPanelObj={this.getContentPanelObj} updateColOrder={this.updateColOrder} />
+        <MenuAreaBox text='C' order={this.state.colOrder[2]} getContentPanelObj={this.getContentPanelObj} updateColOrder={this.updateColOrder} />
 
       </div>
       <div className='resize_grip' ref={(c) => { this.resizeGrip = c; }} />

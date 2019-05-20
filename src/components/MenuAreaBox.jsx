@@ -26,13 +26,15 @@ class MenuAreaBox extends React.Component {
   static defaultProps = {
     text: '',
     order: 1,
-    getContentPanelObj: () => {}
+    getContentPanelObj: () => {},
+    updateColOrder: () => {}
   };
 
   static propTypes = {
     text: PropTypes.string,
     order: PropTypes.number,
-    getContentPanelObj: PropTypes.func
+    getContentPanelObj: PropTypes.func,
+    updateColOrder: PropTypes.func
   };
 
   componentDidMount() {
@@ -41,6 +43,12 @@ class MenuAreaBox extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.handleResizeColumnMove, false);
+  }
+
+  static getDerivedStateFromProps(props, state){
+    return  {
+      order: props.order
+    };
   }
 
   // resize column
@@ -82,33 +90,54 @@ class MenuAreaBox extends React.Component {
 
   handleDragColumnStart = (e) => {
     e.stopPropagation();
+    e.dataTransfer.setData("order", this.state.order);
     this.dragStartX = e.pageX;
-    window.addEventListener('mousemove', this.handleDragColumnMove, false);
-    window.addEventListener('mouseup', this.handleDragColumnEnd, false);
+    window.addEventListener('drag', this.handleDragColumnMove, false);
+    window.addEventListener('dragend', this.handleDragColumnEnd, false);
   }
 
   handleDragColumnMove = (e) => {
     let dist = e.pageX - this.dragStartX;
-    this.panel.style.left = dist + 'px';
+    this.panel.style.pointerEvents = 'none';
+    this.titleInput.style.pointerEvents = 'all';
+    this.panel.style.left =  dist + 'px';
   }
 
   handleDragColumnEnd = () => {
     this.panel.style.left = 'auto';
     this.panel.style.top = 'auto';
-    window.removeEventListener('mousemove', this.handleDragColumnMove, false);
-    window.removeEventListener('mouseup', this.handleDragColumnEnd, false);
+    this.panel.style.pointerEvents = 'all';
+    window.removeEventListener('drag', this.handleDragColumnMove, false);
+    window.removeEventListener('dragend', this.handleDragColumnEnd, false);
   }
 
+  handleDrop = (e) => {
+    e.preventDefault();
+    let draggedIndex = e.dataTransfer.getData("order");
+    let thisIndex = this.state.order;
+    this.props.updateColOrder(draggedIndex, thisIndex);
+  }
+
+  handleDropOver = (e) => {
+    e.preventDefault();
+  }
 
   render() {
     let styles = {
-      order: this.props.order,
+      order: this.state.order,
       gridColumnStart: 'span ' + this.state.size
     };
 
-    return <div className='box' ref={(c) => { this.panel = c; }} style={styles}>
-      <input className='title_input' ref={(c) => { this.titleInput = c; }} type='text' defaultValue='Title' onMouseDown={this.handleDragColumnStart} />
-      {this.props.text}
+    return <div className='box' ref={(c) => { this.panel = c; }} style={styles} onDrop={this.handleDrop} onDragOver={this.handleDropOver}>
+      <input
+      draggable='true'
+        className='title_input'
+        ref={(c) => { this.titleInput = c; }}
+        type='text'
+        defaultValue='Title'
+        onDragStart={this.handleDragColumnStart}
+        tabIndex={this.state.order} />
+      {this.props.text + ' , ' + this.state.order}
       <div className='box_resize_grip' ref={(c) => { this.resizeGrip = c; }} />
     </div>;
   }
